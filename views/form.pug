@@ -1,0 +1,25 @@
+extends layout
+
+block content
+
+  //- data = data || {}
+  //- if errors
+    //- ul
+      //- for error in errors
+       //- li= error.msg
+        
+  if errors && errors.length
+    .error-box
+      h3 Please fix the following:
+      ul
+        each err in errors
+          li= err
+
+  form(action="/" method="POST")
+    label(for="name") Name:
+    input(type="text" id="name" name="name" value=values.name required)
+
+    label(for="email") Email:
+    input(type="email" id="email" name="email" value=values.email required)
+
+    button(type="submit") Submit
