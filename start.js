@@ -1,7 +1,7 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 
-/* With mongoose 9.1.4, those two options are not supported anymore so its crashing just updated to below
+ /*With mongoose 9.1.4, those two options are not supported anymore so its crashing just updated to below
 mongoose.connect(process.env.DATABASE, {
   useNewUrlParser: true,
   useUnifiedTopology: true
