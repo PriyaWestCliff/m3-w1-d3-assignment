@@ -1,25 +1,28 @@
 extends layout
 
 block content
+  -data = data || {}
 
-  //- data = data || {}
-  //- if errors
-    //- ul
-      //- for error in errors
-       //- li= error.msg
-        
-  if errors && errors.length
-    .error-box
-      h3 Please fix the following:
-      ul
-        each err in errors
-          li= err
+  if errors
+    ul
+      for error in errors
+        li= error.msg
 
-  form(action="/" method="POST")
-    label(for="name") Name:
-    input(type="text" id="name" name="name" value=values.name required)
+  form(action='.' method='POST')
+    label(for='name') Name:
+    input(
+      type='text'
+      id='name'
+      name='name'
+      value=data.name
+    )
 
-    label(for="email") Email:
-    input(type="email" id="email" name="email" value=values.email required)
+    label(for='email') Email:
+    input(
+      type='email'
+      id='email'
+      name='email'
+      value=data.email
+    )
 
-    button(type="submit") Submit
+    input(type='submit' value='Submit')

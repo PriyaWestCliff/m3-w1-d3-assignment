@@ -3,66 +3,35 @@ const router = express.Router();
 
 const { check, validationResult } = require('express-validator');
 
-router.get('/test', function (req, res) {
-  res.send('It works!');
+router.get('/', function(req, res) {
+  res.render('form', { title: 'Registration form' });
 });
 
-// GET form page
-router.get('/', function (req, res) {
-  res.render('form', {
-    title: 'Registration Form',
-    errors: [],
-    values: { name: '', email: '' }
-  });
-});
-
-//  put validators BEFORE the callback
 router.post(
   '/',
   [
     check('name')
-      .trim()
-      .isLength({ min: 2 })
-      .withMessage('Name must be at least 2 characters.'),
+      .isLength({ min: 1 })
+      .withMessage('Please enter a name'),
 
     check('email')
-      .trim()
-      .isEmail()
-      .withMessage('Please enter a valid email address.')
+      .isLength({ min: 1 })
+      .withMessage('Please enter an email')
   ],
-  function (req, res) {
+  function(req, res) {
     console.log(req.body);
 
-    // validationResult
-    const result = validationResult(req);
+    const errors = validationResult(req);
 
-    const errors = result.array().map(err => err.msg);
-
-    const name = (req.body.name || '').trim();
-    const email = (req.body.email || '').trim();
-
-    if (errors.length > 0) {
-      return res.status(400).render('form', {
-        title: 'Registration Form',
-        errors,                 
-        values: { name, email } 
-      });
-    }
-
-    return res.render('success', {
-      title: 'Success',
-      name,
-      email
-    });
-
-    /*if (errors.isEmpty()) {
-    //  res.send('Thank you for your registration!');
+    if (errors.isEmpty()) {
+      res.send('Thank you for your registration!');
     } else {
       res.render('form', {
         title: 'Registration form',
         errors: errors.array(),
-        data: req.body,
-      });*/
+        data: req.body
+      });
+    }
   }
 );
 
