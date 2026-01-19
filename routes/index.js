@@ -57,8 +57,7 @@ router.post(
   }
 );
 
-router.get('/registrations', basic.check(), (req, res) => {
-  console.log('✅ /registrations route hit');
+/*router.get('/registrations', basic.check(), (req, res) => {
   Registration.find()
     .then((registrations) => {
       res.render('index', { title: 'Listing registrations', registrations });
@@ -66,6 +65,21 @@ router.get('/registrations', basic.check(), (req, res) => {
     .catch(() => {
       res.send('Sorry! Something went wrong.');
     });
+});*/
+
+router.get('/registrations', basic.check(), (req, res) => {
+  console.log('✅ /registrations route hit');
+
+  Registration.find()
+    .lean()
+    .then((registrations) => {
+      res.render('index', { title: 'Listing registrations', registrations });
+    })
+    .catch((err) => {
+      console.log('❌ /registrations error:', err);
+      res.status(500).send('Sorry! Something went wrong.');
+    });
 });
+
 
 module.exports = router;
