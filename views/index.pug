@@ -1,8 +1,8 @@
 extends layout
 
 block content
-  if registrations && registrations.length
-    table
+  if registrations.length
+    table.listing-table.table-dark.table-striped
       tr
         th Name
         th Email

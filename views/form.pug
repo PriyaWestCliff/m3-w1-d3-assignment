@@ -4,26 +4,32 @@ block content
   -data = data || {}
 
   if errors
-    .error-box
-      ul
-        for error in errors
-          li= error.msg
+    ul.my-errors
+      for error in errors
+        li= error.msg
 
-  form(action='.' method='POST')
-    label(for='name') Name:
+  form(action="." method="POST" class="form-registration")
+
+    label(for="name") Name:
     input(
-      type='text'
-      id='name'
-      name='name'
+      type="text"
+      id="name"
+      name="name"
+      class="form-control"
       value=data.name
     )
 
-    label(for='email') Email:
+    label(for="email") Email:
     input(
-      type='email'
-      id='email'
-      name='email'
+      type="email"
+      id="email"
+      name="email"
+      class="form-control"
       value=data.email
     )
 
-    button(type='submit') Submit
+    input(
+      type="submit"
+      value="Submit"
+      class="btn btn-lg btn-primary btn-block"
+    )
