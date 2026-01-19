@@ -40,6 +40,7 @@ router.post(
       registration
         .save()
         .then(() => {
+          console.log('✅ Saved to MongoDB');
           res.send('Thank you for your registration!');
         })
         .catch((err) => {
@@ -57,6 +58,7 @@ router.post(
 );
 
 router.get('/registrations', basic.check(), (req, res) => {
+  console.log('✅ /registrations route hit');
   Registration.find()
     .then((registrations) => {
       res.render('index', { title: 'Listing registrations', registrations });

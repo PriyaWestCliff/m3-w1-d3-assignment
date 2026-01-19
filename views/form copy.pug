@@ -4,10 +4,9 @@ block content
   -data = data || {}
 
   if errors
-    .error-box
-      ul
-        for error in errors
-          li= error.msg
+    ul
+      for error in errors
+        li= error.msg
 
   form(action='.' method='POST')
     label(for='name') Name:
@@ -26,4 +25,4 @@ block content
       value=data.email
     )
 
-    button(type='submit') Submit
+    input(type='submit' value='Submit')
